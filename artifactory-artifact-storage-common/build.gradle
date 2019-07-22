@@ -1,0 +1,29 @@
+plugins{
+    id 'com.github.rodm.teamcity-common' version "1.2.1"
+}
+
+dependencies {
+    compile "org.jfrog.artifactory.client:artifactory-java-client-api:2.8.4"
+    compile "org.jfrog.artifactory.client:artifactory-java-client-services:2.8.4"
+    testCompile "org.testng:testng:6.8.21"
+}
+
+teamcity {
+    version = teamcityVersion
+}
+
+repositories {
+    jcenter()
+}
+
+tasks.withType(JavaCompile) {
+    sourceCompatibility = "1.8"
+    targetCompatibility = "1.8"
+
+    if (project.hasProperty('JDK_18')) {
+        options.bootstrapClasspath = layout.files(
+                "$JDK_18/jre/lib/rt.jar",
+                "$JDK_18/jre/lib/jsse.jar"
+        )
+    }
+}

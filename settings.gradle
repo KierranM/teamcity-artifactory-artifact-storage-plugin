@@ -1,0 +1,5 @@
+rootProject.name = 'artifactory-artifact-storage'
+
+include 'artifactory-artifact-storage-agent'
+include 'artifactory-artifact-storage-common'
+include 'artifactory-artifact-storage-server'
