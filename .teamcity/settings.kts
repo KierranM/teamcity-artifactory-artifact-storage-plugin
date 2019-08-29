@@ -15,6 +15,7 @@ project {
     }
     buildType(Build)
     buildType(PublishToRelease)
+
 }
 
 object Build : BuildType({
@@ -33,9 +34,9 @@ object Build : BuildType({
             scriptContent = """
                 #!/bin/bash -e
                 branch="%teamcity.build.branch%"
-                
-                if [[ ${'$'}branch =~ "v.*" ]]; then
-                    version=$(echo ${'$'}branch | sed 's/v//')
+                regex='v([0-9]+\.[0-9]+\.[0-9]+.*)'
+                if [[ ${'$'}branch =~ ${'$'}regex ]]; then
+                    version=${'$'}{BASH_REMATCH[1]}
                     echo "##teamcity[setParameter name='env.ORG_GRADLE_PROJECT_versionNumber' value='${"$"}{version}']"
                 else
                     echo "Not a release build"
