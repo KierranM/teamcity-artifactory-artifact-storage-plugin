@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <project>
   <modelVersion>4.0.0</modelVersion>
-  <name>Kierranm_TeamcityArtifactoryArtifactStoragePlugin Config DSL Script</name>
-  <groupId>Kierranm_TeamcityArtifactoryArtifactStoragePlugin</groupId>
+  <name>TeamcityArtifactoryArtifactStoragePlugin Config DSL Script</name>
+  <groupId>TeamcityArtifactoryArtifactStoragePlugin</groupId>
   <artifactId>Kierranm_TeamcityArtifactoryArtifactStoragePlugin_dsl</artifactId>
   <version>1.0-SNAPSHOT</version>
 
