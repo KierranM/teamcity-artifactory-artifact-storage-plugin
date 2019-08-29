@@ -81,7 +81,7 @@ object PublishToRelease: BuildType({
         script {
             name = "Push Artifact to Release"
             scriptContent = """
-                upload_url=$(curl -H "Authorization: token %github.publishing_token%" "https://api.github.com/repos/KierranM/teamcity-artifactory-artifact-storage-plugin/releases/tags/%teamcity.build.branch%" | jq .upload_url | sed 's/{.*}//')
+                upload_url=$(curl -H "Authorization: token %github.publishing_token%" "https://api.github.com/repos/KierranM/teamcity-artifactory-artifact-storage-plugin/releases/tags/%teamcity.build.branch%" | jq -r .upload_url | sed 's/{.*}//' )
                 curl -H "Authorization: token %github.publishing_token%" -XPOST -i -T artifactory-artifact-storage-%teamcity.build.branch%.zip "${'$'}{upload_url}?name=artifactory-artifact-storage-%teamcity.build.branch%.zip"
             """.trimIndent()
         }
