@@ -87,6 +87,15 @@ object PublishToRelease: BuildType({
         }
     }
 
+    triggers {
+        vcs {
+            branchFilter = """
+                -:*
+                +:v*
+            """.trimIndent()
+        }
+    }
+
     dependencies {
         dependency(Build) {
             artifacts {
