@@ -10,6 +10,12 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="artifactory-artifact-storage.artifactory-artifact-storage-agent.main" target="1.6" />
+      <module name="artifactory-artifact-storage.artifactory-artifact-storage-agent.test" target="1.6" />
+      <module name="artifactory-artifact-storage.artifactory-artifact-storage-common.main" target="1.8" />
+      <module name="artifactory-artifact-storage.artifactory-artifact-storage-common.test" target="1.8" />
+      <module name="artifactory-artifact-storage.artifactory-artifact-storage-server.main" target="1.8" />
+      <module name="artifactory-artifact-storage.artifactory-artifact-storage-server.test" target="1.8" />
       <module name="Kierranm_TeamcityArtifactoryArtifactStoragePlugin_dsl" target="1.5" />
     </bytecodeTargetLevel>
   </component>

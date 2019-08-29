@@ -88,11 +88,6 @@ public class ArtifactoryUtil {
     return getPathPrefix(artifactsInfo.getCommonProperties());
   }
 
-  @Nullable
-  public static String getPathPrefix(@NotNull Map<String, String> properties) {
-    return properties.get(ArtifactoryConstants.ARTIFACTORY_REPOSITORY_PATH_PREFIX_ATTR);
-  }
-
   public static String getContentType(File file) {
     String contentType = URLConnection.guessContentTypeFromName(file.getName());
     if (StringUtil.isNotEmpty(contentType)) {

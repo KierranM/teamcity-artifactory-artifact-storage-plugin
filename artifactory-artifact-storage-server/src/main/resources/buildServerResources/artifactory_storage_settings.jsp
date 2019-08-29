@@ -60,13 +60,6 @@
             <span class="error" id="error_${params.repositoryKey}"></span>
         </td>
     </tr>
-    <tr>
-        <th><label for="${params.pathPrefix}">Repository path prefix: </label></th>
-        <td>
-            <props:textProperty name="${params.pathPrefix}" className="longField" maxlength="256"/>
-            <span class="smallNote">Optional custom path within the repository where artifacts will be uploaded</span>
-        </td>
-    </tr>
 </l:settingsGroup>
 
 <script type="text/javascript">
