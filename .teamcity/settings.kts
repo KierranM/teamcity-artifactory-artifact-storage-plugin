@@ -31,6 +31,7 @@ object Build : BuildType({
         script {
             name = "Set Version Number"
             scriptContent = """
+                #!/bin/bash -e
                 branch="%teamcity.build.branch%"
                 
                 if [[ ${'$'}branch =~ "v.*" ]]; then
