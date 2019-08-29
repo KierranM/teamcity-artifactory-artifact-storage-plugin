@@ -28,6 +28,19 @@ object Build : BuildType({
     }
 
     steps {
+        script {
+            name = "Set Version Number"
+            scriptContent = """
+                branch="%teamcity.build.branch%"
+                
+                if [[ ${'$'}branch =~ "v.*" ]]; then
+                    version=$(echo ${'$'}branch | sed 's/v//')
+                    echo "##teamcity[setParameter name='env.ORG_GRADLE_PROJECT_versionNumber' value='${"$"}{version}']"
+                else
+                    echo "Not a release build"
+                fi
+            """.trimIndent()
+        }
         gradle {
             tasks = "clean build"
             buildFile = ""

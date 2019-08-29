@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id=":artifactory-artifact-storage-agent:test" external.linked.project.path="$MODULE_DIR$/../../../artifactory-artifact-storage-agent" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="teamcity-artifactory-storage" external.system.module.type="sourceSet" external.system.module.version="SNAPSHOT-20190829194359" type="JAVA_MODULE" version="4">
+<module external.linked.project.id=":artifactory-artifact-storage-agent:test" external.linked.project.path="$MODULE_DIR$/../../../artifactory-artifact-storage-agent" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="teamcity-artifactory-storage" external.system.module.type="sourceSet" external.system.module.version="SNAPSHOT-20190830081227" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="Spring" name="Spring">
       <configuration />
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6">
-    <output-test url="file://$MODULE_DIR$/../../../artifactory-artifact-storage-agent/build/classes/java/test" />
+    <output-test url="file://$MODULE_DIR$/../../../artifactory-artifact-storage-agent/out/test/classes" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../artifactory-artifact-storage-agent/src/test" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="artifactory-artifact-storage.artifactory-artifact-storage-agent.main" />
-    <orderEntry type="module" module-name="artifactory-artifact-storage.artifactory-artifact-storage-common.main" />
+    <orderEntry type="module" module-name="artifactory-artifact-storage-agent_main" />
+    <orderEntry type="module" module-name="artifactory-artifact-storage-common_main" />
     <orderEntry type="library" name="Gradle: org.jfrog.artifactory.client:artifactory-java-client-services:2.8.4" level="project" />
     <orderEntry type="library" name="Gradle: org.jfrog.artifactory.client:artifactory-java-client-api:2.8.4" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.teamcity:agent-api:2019.1" level="project" />
@@ -65,5 +65,5 @@
     <orderEntry type="library" name="Gradle: org.jetbrains.teamcity.idea:trove4j:95.677" level="project" />
     <orderEntry type="library" name="Gradle: jdom:jdom:1.0" level="project" />
   </component>
-  <component name="TestModuleProperties" production-module="artifactory-artifact-storage.artifactory-artifact-storage-agent.main" />
+  <component name="TestModuleProperties" production-module="artifactory-artifact-storage-agent_main" />
 </module>
