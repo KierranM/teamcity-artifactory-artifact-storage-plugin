@@ -1,6 +1,6 @@
 # TeamCity Artifactory Artifact Storage Plugin
 
-![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/KierranM/teamcity-artifactory-artifact-storage-plugin?sort=semver&style=plastic)
+![[Latest Release](https://github.com/KierranM/teamcity-artifactory-artifact-storage-plugin/releases/latest)](https://img.shields.io/github/v/release/KierranM/teamcity-artifactory-artifact-storage-plugin?sort=semver)
 
 This plugin allows replacing the TeamCity built-in artifacts storage with
 [JFrog Artifactory](https://jfrog.com/artifactory/). The artifacts storage can
