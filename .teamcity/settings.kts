@@ -10,7 +10,7 @@ version = "2019.1"
 
 project {
     params {
-        // param("teamcity.ui.settings.readOnly", "true")
+        param("teamcity.ui.settings.readOnly", "true")
         password("github.publishing_token", "credentialsJSON:e463dfac-587e-44e7-9aff-8f7faf91090f")
     }
     buildType(Build)
@@ -21,6 +21,9 @@ project {
 object Build : BuildType({
     name = "Build"
     description = "Build and package the artifact"
+
+    // For build Widget
+    allowExternalStatus = true
 
     artifactRules = "+:artifactory-artifact-storage-server/build/distributions/artifactory-artifact-storage.zip"
 
