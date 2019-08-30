@@ -10,7 +10,7 @@ version = "2019.1"
 
 project {
     params {
-        param("teamcity.ui.settings.readOnly", "true")
+        // param("teamcity.ui.settings.readOnly", "true")
         password("github.publishing_token", "credentialsJSON:e463dfac-587e-44e7-9aff-8f7faf91090f")
     }
     buildType(Build)
