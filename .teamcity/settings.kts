@@ -51,6 +51,32 @@ object Build : BuildType({
             buildFile = ""
             gradleWrapperPath = ""
         }
+        script {
+            name = "Remove SL4J Libs"
+            scriptContent = """
+                #!/bin/bash -e
+                cd artifactory-artifact-storage-server/build/distributions
+                unzip artifactory-artifact-storage.zip
+                pushd agent
+                unzip artifactory-artifact-storage-agent.zip
+                rm artifactory-artifact-storage-agent.zip \
+                lib/slf4j-api-* \
+                lib/logback-core-* \
+                lib/logback-classic-* \
+                lib/log4j-over-slf4j-* \
+                lib/jcl-over-slf4j-*
+                zip -r artifactory-artifact-storage-agent.zip lib/* teamcity-plugin.xml
+                rm -rf lib teamcity-plugin.xml
+                popd
+                rm artifactory-artifact-storage.zip \
+                server/slf4j-api-* \
+                server/logback-core-* \
+                server/logback-classic-* \
+                server/log4j-over-slf4j-* \
+                server/jcl-over-slf4j-*
+                zip -r artifactory-artifact-storage.zip agent/* server/* teamcity-plugin.xml
+            """.trimIndent()
+        }
     }
 
     triggers {
