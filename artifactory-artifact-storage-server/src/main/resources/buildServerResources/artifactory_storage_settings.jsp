@@ -44,6 +44,19 @@
         </td>
     </tr>
     <tr>
+        <th><label for="${params.repositoryType}">Artifactory repository type: <l:star/></label></th>
+        <td>
+            <div class="posRel">
+                <c:set var="repository" value="${propertiesBean.properties[params.repositoryKey]}"/>
+                <props:selectProperty name="${params.repositoryType}" className="longField">
+                    <props:option value="local">Local</props:option>
+                    <props:option value="virtual">Virtual</props:option>
+                </props:selectProperty>
+            </div>
+            <span class="error" id="error_${params.repositoryType}"></span>
+        </td>
+    </tr>
+    <tr>
         <th><label for="${params.repositoryKey}">Artifactory repository name: <l:star/></label></th>
         <td>
             <div class="posRel">
@@ -65,6 +78,7 @@
 <script type="text/javascript">
     var username = BS.Util.escapeId('${params.username}');
     var url = BS.Util.escapeId('${params.url}');
+    var repositoryType = BS.Util.escapeId('${params.repositoryType}');
     var password = BS.Util.escapeId('secure:${params.password}');
     var accessToken = BS.Util.escapeId('secure:${params.accessToken}');
     var pathPrefix = BS.Util.escapeId('${params.pathPrefix}');
@@ -115,7 +129,7 @@
                     $refreshButton.removeClass('icon-spin');
                 });
     }
-    $j(document).on('change', url + ', ' + username + ', ' + password + ', ' + accessToken, function () {
+    $j(document).on('change', url + ', ' + username + ', ' + password + ', ' + accessToken + ', ' + repositoryType, function () {
         loadRepositories();
     });
     $j(document).on('click', '#repositories-refresh', function () {
