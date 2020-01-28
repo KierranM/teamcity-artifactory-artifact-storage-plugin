@@ -54,7 +54,7 @@ object Build : BuildType({
         script {
             name = "Remove SL4J Libs"
             scriptContent = """
-                #!/bin/bash -e
+                #!/bin/sh -e
 
                 apk add --no-cache zip
 
