@@ -60,7 +60,7 @@ object Build : BuildType({
 
                 cd artifactory-artifact-storage-server/build/distributions
                 unzip artifactory-artifact-storage.zip
-                pushd agent
+                cd agent
                 unzip artifactory-artifact-storage-agent.zip
                 rm artifactory-artifact-storage-agent.zip \
                 lib/slf4j-api-* \
@@ -70,7 +70,7 @@ object Build : BuildType({
                 lib/jcl-over-slf4j-*
                 zip -r artifactory-artifact-storage-agent.zip lib/* teamcity-plugin.xml
                 rm -rf lib teamcity-plugin.xml
-                popd
+                cd ..
                 rm artifactory-artifact-storage.zip \
                 server/slf4j-api-* \
                 server/logback-core-* \
