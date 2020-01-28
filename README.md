@@ -11,7 +11,7 @@ resolving of artifact dependencies and clean-up of build artifacts.
 
 # State
 
-This plugin is based heavily on the [teamcity-s3-artifact-storage-plugin](github.com/JetBrains/teamcity-s3-artifact-storage-plugin).
+This plugin is based heavily on the [teamcity-s3-artifact-storage-plugin](https://github.com/JetBrains/teamcity-s3-artifact-storage-plugin).
 The baseline functionality is complete, but it needs significant review.
 
 # Compatibility
