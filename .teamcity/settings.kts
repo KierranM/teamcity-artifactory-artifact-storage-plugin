@@ -79,6 +79,7 @@ object Build : BuildType({
                 server/jcl-over-slf4j-*
                 zip -r artifactory-artifact-storage.zip agent/* server/* teamcity-plugin.xml
             """.trimIndent()
+            dockerImage = "alpine:latest"
         }
     }
 
