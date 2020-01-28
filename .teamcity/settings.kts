@@ -55,6 +55,9 @@ object Build : BuildType({
             name = "Remove SL4J Libs"
             scriptContent = """
                 #!/bin/bash -e
+
+                apk add --no-cache zip
+
                 cd artifactory-artifact-storage-server/build/distributions
                 unzip artifactory-artifact-storage.zip
                 pushd agent
