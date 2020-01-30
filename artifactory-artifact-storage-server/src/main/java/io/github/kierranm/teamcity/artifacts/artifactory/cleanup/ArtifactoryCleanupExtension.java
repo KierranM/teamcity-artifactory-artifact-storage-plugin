@@ -18,7 +18,7 @@ import jetbrains.buildServer.serverSide.ServerPaths;
 import jetbrains.buildServer.serverSide.TeamCityProperties;
 import jetbrains.buildServer.serverSide.artifacts.ServerArtifactHelper;
 import jetbrains.buildServer.serverSide.cleanup.*;
-import jetbrains.buildServer.util.CollectionsUtil;
+import jetbrains.buildServer.serverSide.impl.cleanup.ArtifactPathsEvaluator;
 import jetbrains.buildServer.util.StringUtil;
 import jetbrains.buildServer.util.positioning.PositionAware;
 import jetbrains.buildServer.util.positioning.PositionConstraint;
@@ -32,10 +32,7 @@ import org.jfrog.artifactory.client.model.File;
  * Created by Kierran McPherson
  * date: 2019/07/20
  */
-public class ArtifactoryCleanupExtension implements CleanupExtension, PositionAware, KeepCleanupExtension {
-
-  // TODO: replace to KeepArtifacts.KEEP_ALL_PATTERN when core will be updated
-  private static final String KEEP_ALL_PATTERN = "+:**/*";
+public class ArtifactoryCleanupExtension implements CleanupExtension, PositionAware {
 
   @NotNull
   private final ServerArtifactStorageSettingsProvider mySettingsProvider;
@@ -65,9 +62,7 @@ public class ArtifactoryCleanupExtension implements CleanupExtension, PositionAw
         if (pathPrefix == null) {
           continue;
         }
-        final List<String> pathsToDelete = cleanupContext.getCleanupLevel().isCleanHistoryEntry()
-          ? getAllPaths(artifactsInfo)
-          : getPathsToDelete(artifactsInfo, cleanupContext.getCleanupPolicyForBuild(build.getBuildId()).getArtifactPatterns());
+        List<String> pathsToDelete = ArtifactPathsEvaluator.getPathsToDelete((BuildCleanupContextEx) cleanupContext, build, artifactsInfo);
         if (pathsToDelete.isEmpty()) {
           continue;
         }
@@ -79,38 +74,7 @@ public class ArtifactoryCleanupExtension implements CleanupExtension, PositionAw
     }
   }
 
-  @Override
-  public void cleanupBuildsData(@NotNull BuildKeepContext keepContext){
-    for (SFinishedBuild build : keepContext.getBuilds()) {
-      try {
-        final ArtifactListData artifactsInfo = myHelper.getArtifactList(build);
-        if (artifactsInfo == null) {
-          continue;
-        }
-        final String pathPrefix = ArtifactoryUtil.getPathPrefix(artifactsInfo);
-        if (pathPrefix == null) {
-          continue;
-        }
-        final Collection<String> keepPatterns = keepContext.getKeepBuildData(build).getKeepArtifactsPatterns();
-        if (keepPatterns.size() == 1 && KEEP_ALL_PATTERN.equals(keepPatterns.iterator().next())) {
-          continue;
-        }
-        final List<String> pathsToDelete = keepPatterns.isEmpty()
-          ? getAllPaths(artifactsInfo)
-          : getPathsToDelete(artifactsInfo, keepPatterns);
-        if (pathsToDelete.isEmpty()) {
-          continue;
-        }
-        doClean(keepContext.getErrorReporter(), build, pathPrefix, pathsToDelete);
-      } catch (Throwable e) {
-        Loggers.CLEANUP.debug(e);
-        keepContext.getErrorReporter().buildCleanupError(build.getBuildId(), "Failed to remove S3 artifacts: " + e.getMessage());
-      }
-    }
-  }
-
-  private void doClean(@NotNull ErrorReporter errorReporter, @NotNull SFinishedBuild build, @NotNull String pathPrefix, @NotNull List<String> pathsToDelete)
-    throws IOException {
+  private void doClean(@NotNull ErrorReporter errorReporter, @NotNull SFinishedBuild build, @NotNull String pathPrefix, @NotNull List<String> pathsToDelete) throws IOException {
     final Map<String, String> params = ArtifactoryUtil.validateParameters(mySettingsProvider.getStorageSettings(build));
     final String repositoryKey = ArtifactoryUtil.getRepositoryKey(params);
     final Artifactory afClient = ArtifactoryUtil.getClient(params);
@@ -156,29 +120,6 @@ public class ArtifactoryCleanupExtension implements CleanupExtension, PositionAw
     Loggers.CLEANUP.info("Removed [" + succeededNum + "] S3 " + StringUtil.pluralize("object", succeededNum.get()) + suffix);
 
     myHelper.removeFromArtifactList(build, pathsToDelete);
-  }
-
-  @NotNull
-  private List<String> getAllPaths(@NotNull ArtifactListData artifactsInfo) {
-    return CollectionsUtil.convertCollection(artifactsInfo.getArtifactList(), ArtifactData::getPath);
-  }
-
-  @NotNull
-  private List<String> getPathsToDelete(@NotNull ArtifactListData artifactsInfo, @NotNull String cleanPatterns) {
-    final List<String> paths = CollectionsUtil.convertCollection(artifactsInfo.getArtifactList(), ArtifactData::getPath);
-    return new ArrayList<>(new PathPatternFilter(cleanPatterns).filterPaths(paths));
-  }
-
-  @NotNull
-  private List<String> getPathsToDelete(@NotNull ArtifactListData artifactsInfo, @NotNull Collection<String> keepPatterns) {
-    List<String> paths = artifactsInfo.getArtifactList().stream().map(ArtifactData::getPath).collect(Collectors.toList());
-    Set<String> pathsToKeep = keepPatterns
-      .stream()
-      .map(keepPattern -> new PathPatternFilter(keepPattern).filterPaths(paths))
-      .flatMap(Collection::stream)
-      .collect(Collectors.toSet());
-    paths.removeAll(pathsToKeep);
-    return paths;
   }
 
   @Override
