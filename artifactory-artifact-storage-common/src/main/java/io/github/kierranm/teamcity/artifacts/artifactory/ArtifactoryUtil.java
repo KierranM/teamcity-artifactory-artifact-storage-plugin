@@ -69,6 +69,11 @@ public class ArtifactoryUtil {
   }
 
   @Nullable
+  public static String getRepositoryType(@NotNull Map<String, String> params) {
+    return params.get(ArtifactoryConstants.ARTIFACTORY_REPOSITORY_TYPE);
+  }
+
+  @Nullable
   public static String getUsername(@NotNull Map<String, String> params) {
     return params.get(ArtifactoryConstants.ARTIFACTORY_USERNAME);
   }

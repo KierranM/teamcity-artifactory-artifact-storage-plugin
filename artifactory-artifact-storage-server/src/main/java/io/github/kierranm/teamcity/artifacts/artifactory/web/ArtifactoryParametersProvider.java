@@ -7,6 +7,10 @@ public class ArtifactoryParametersProvider {
     return ArtifactoryConstants.ARTIFACTORY_URL;
   }
 
+  public String getRepositoryType() {
+    return ArtifactoryConstants.ARTIFACTORY_REPOSITORY_TYPE;
+  }
+
   public String getRepositoryKey() {
     return ArtifactoryConstants.ARTIFACTORY_REPOSITORY_KEY;
   }

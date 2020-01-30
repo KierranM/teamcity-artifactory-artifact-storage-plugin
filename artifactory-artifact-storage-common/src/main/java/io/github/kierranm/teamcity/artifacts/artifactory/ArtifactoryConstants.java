@@ -7,6 +7,7 @@ package io.github.kierranm.teamcity.artifacts.artifactory;
 public class ArtifactoryConstants {
 
   public static final String ARTIFACTORY_URL = "storage.artifactory.url";
+  public static final String ARTIFACTORY_REPOSITORY_TYPE = "storage.artifactory.repository.type";
   public static final String ARTIFACTORY_REPOSITORY_KEY = "storage.artifactory.repository.key";
   public static final String ARTIFACTORY_USERNAME = "storage.artifactory.username";
   public static final String SECURE_ARTIFACTORY_PASSWORD = "secure:storage.artifactory.password";
