@@ -16,6 +16,7 @@ repositories {
 
 dependencies {
     compile project(':artifactory-artifact-storage-common')
+    compile 'commons-net:commons-net:3.3'
     provided "org.jetbrains.teamcity.internal:server:${teamcityVersion}"
 
     agent project(path: ':artifactory-artifact-storage-agent', configuration: 'plugin')
