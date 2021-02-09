@@ -10,8 +10,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="artifactory-artifact-storage-agent_main" target="1.6" />
-      <module name="artifactory-artifact-storage-agent_test" target="1.6" />
+      <module name="artifactory-artifact-storage-agent_main" target="1.8" />
+      <module name="artifactory-artifact-storage-agent_test" target="1.8" />
       <module name="artifactory-artifact-storage-common_main" target="1.8" />
       <module name="artifactory-artifact-storage-common_test" target="1.8" />
       <module name="artifactory-artifact-storage-server_main" target="1.8" />

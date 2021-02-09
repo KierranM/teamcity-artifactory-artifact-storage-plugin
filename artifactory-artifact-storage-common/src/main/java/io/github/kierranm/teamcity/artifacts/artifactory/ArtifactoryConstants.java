@@ -23,4 +23,6 @@ public class ArtifactoryConstants {
 
   public static final String ARTIFACTORY_CLEANUP_BATCH_SIZE = "storage.artifactory.cleanup.batchSize";
   public static final String ARTIFACTORY_CLEANUP_USE_PARALLEL = "storage.artifactory.cleanup.useParallel";
+
+  public static final String ARTIFACTORY_UPLOAD_PARALLELISM = "storage.artifactory.upload.parallelism";
 }
