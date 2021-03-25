@@ -40,6 +40,10 @@ public class ArtifactoryUtil {
         invalids.put(ArtifactoryConstants.SECURE_ARTIFACTORY_ACCESS_TOKEN, "Artifactory password or token must not be empty if username is set");
       }
     }
+    String parallelism = params.get(ArtifactoryConstants.ARTIFACTORY_UPLOAD_PARALLELISM);
+    if (!StringUtil.isEmptyOrSpaces(parallelism) && !StringUtil.isAPositiveNumber(parallelism)) {
+      invalids.put(ArtifactoryConstants.ARTIFACTORY_UPLOAD_PARALLELISM, "Parallelism level must be a positive number if set");
+    }
     return invalids;
   }
 
@@ -96,6 +100,14 @@ public class ArtifactoryUtil {
   @Nullable
   public static String getPathPrefix(@NotNull Map<String, String> properties) {
     return properties.get(ArtifactoryConstants.ARTIFACTORY_REPOSITORY_PATH_PREFIX_ATTR);
+  }
+
+  public static int getParallelism(@NotNull Map<String, String> properties) {
+    try {
+      return Integer.parseInt(properties.get(ArtifactoryConstants.ARTIFACTORY_UPLOAD_PARALLELISM));
+    } catch (Exception e) {
+      return 1;
+    }
   }
 
   public static String getContentType(File file) {
