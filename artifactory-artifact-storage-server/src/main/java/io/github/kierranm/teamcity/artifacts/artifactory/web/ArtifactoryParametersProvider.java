@@ -31,6 +31,10 @@ public class ArtifactoryParametersProvider {
     return ArtifactoryConstants.ARTIFACTORY_ACCESS_TOKEN;
   }
 
+  public String getParallelism() {
+    return ArtifactoryConstants.ARTIFACTORY_UPLOAD_PARALLELISM;
+  }
+
   public String getContainersPath() {
     return String.format("/plugins/artifactory-artifact-storage/%s.html", ArtifactoryConstants.ARTIFACTORY_SETTINGS_PATH);
   }

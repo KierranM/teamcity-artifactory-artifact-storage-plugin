@@ -73,6 +73,14 @@
             <span class="error" id="error_${params.repositoryKey}"></span>
         </td>
     </tr>
+    <tr>
+        <th><label for="${params.parallelism}">Upload parallelism: </label></th>
+        <td>
+            <props:textProperty name="${params.parallelism}" className="longField" maxlength="4"/>
+            <span class="smallNote">Number of simultaneous upload requests to Artifactory (default: 1)</span>
+            <span class="error" id="error_${params.parallelism}"></span>
+        </td>
+    </tr>
 </l:settingsGroup>
 
 <script type="text/javascript">
