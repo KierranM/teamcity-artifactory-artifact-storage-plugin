@@ -6,6 +6,7 @@ import io.github.kierranm.teamcity.artifacts.artifactory.ArtifactoryUtil;
 import jetbrains.buildServer.artifacts.ArtifactData;
 import jetbrains.buildServer.serverSide.BuildPromotion;
 import jetbrains.buildServer.serverSide.artifacts.StoredBuildArtifactInfo;
+import jetbrains.buildServer.util.StringUtil;
 import jetbrains.buildServer.web.openapi.artifacts.ArtifactDownloadProcessor;
 import org.apache.commons.net.io.Util;
 import org.jetbrains.annotations.NotNull;
@@ -15,6 +16,7 @@ import org.jfrog.artifactory.client.RepositoryHandle;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URLConnection;
 import java.util.Map;
 import java.io.InputStream;
 
@@ -56,6 +58,11 @@ public class ArtifactoryArtifactDownloadProcessor implements ArtifactDownloadPro
     final String key = ArtifactoryUtil.getPathPrefix(storedBuildArtifactInfo.getCommonProperties()) + artifactPath;
 
     InputStream fileStream = repository.download(key).doDownload();
+
+    final String contentType = URLConnection.guessContentTypeFromName(artifactPath);
+    if (StringUtil.isNotEmpty(contentType)) {
+      httpServletResponse.setHeader("Content-Type", contentType);
+    }
 
     Util.copyStream(fileStream, httpServletResponse.getOutputStream());
 
