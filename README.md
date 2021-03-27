@@ -1,11 +1,3 @@
-# Fork of:
-https://github.com/KierranM/teamcity-artifactory-artifact-storage-plugin
-
-to include 2 PRs not merged:
-
-- https://github.com/KierranM/teamcity-artifactory-artifact-storage-plugin/pull/13
-- https://github.com/KierranM/teamcity-artifactory-artifact-storage-plugin/pull/12
-
 # TeamCity Artifactory Artifact Storage Plugin
 
 ![[Latest Release](https://github.com/KierranM/teamcity-artifactory-artifact-storage-plugin/releases/latest)](https://img.shields.io/github/v/release/KierranM/teamcity-artifactory-artifact-storage-plugin?sort=semver)
